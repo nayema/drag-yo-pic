@@ -4,7 +4,7 @@ import Grid from 'material-ui/Grid'
 import { withStyles } from 'material-ui/styles'
 
 import Header from './Header'
-import ImagesUploader from './ImageUploader/ImagesUploader'
+import ImagesUploader from './ImagesUploader/ImagesUploader'
 
 const styles = theme => ({
   root: {

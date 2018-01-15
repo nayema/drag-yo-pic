@@ -54,7 +54,7 @@ class ImagesUploader extends React.Component {
   }
 }
 
-// const ImageUploader = ({ classes }) => (
+// const ImagesUploader = ({ classes }) => (
 //   <div className={classes.root}>
 //   </div>
 // )
