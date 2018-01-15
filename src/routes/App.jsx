@@ -3,6 +3,8 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import { withStyles } from 'material-ui/styles'
 
+import Header from './Header'
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -27,6 +29,7 @@ const App = ({ classes }) => (
       <Grid item xs className={classes.content}>
         <Paper className={classes.paper}>
           {/* Add components here */}
+          <Header/>
         </Paper>
       </Grid>
     </Grid>
