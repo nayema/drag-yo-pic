@@ -5,7 +5,8 @@ import { withStyles } from 'material-ui/styles'
 const styles = () => ({
   root: {
     flexGrow: 1,
-    marginTop: 15
+    marginTop: 15,
+    textAlign: 'center'
   },
   font: {
     fontFamily: 'Sedgwick Ave Display'

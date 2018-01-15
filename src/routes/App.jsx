@@ -4,6 +4,7 @@ import Grid from 'material-ui/Grid'
 import { withStyles } from 'material-ui/styles'
 
 import Header from './Header'
+import ImagesUploader from './ImageUploader/ImagesUploader'
 
 const styles = theme => ({
   root: {
@@ -25,11 +26,12 @@ const styles = theme => ({
 
 const App = ({ classes }) => (
   <div className={classes.root}>
+    <Header/>
     <Grid container className={classes.container} spacing={24}>
       <Grid item xs className={classes.content}>
         <Paper className={classes.paper}>
           {/* Add components here */}
-          <Header/>
+          <ImagesUploader/>
         </Paper>
       </Grid>
     </Grid>
