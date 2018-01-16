@@ -1,39 +1,65 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "drag-yo-pic",
+  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "history": "^4.7.2",
-    "material-ui": "^1.0.0-beta.27",
-    "material-ui-icons": "^1.0.0-beta.17",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-keypress": "^0.1.5",
-    "react-photo-gallery": "^6.0.22",
-    "react-redux": "^5.0.6",
-    "react-router-redux": "next",
-    "react-scripts": "1.0.17",
-    "react-sortable-hoc": "^0.6.8",
-    "redux": "^3.7.2"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "PORT=3001 nodemon ./bin/www",
+    "test": "node_modules/.bin/jest --watch"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "pg": "^7.4.0",
+    "sequelize": "^4.28.6",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.8",
+    "@types/supertest": "^2.0.4",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.14.0",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^21.2.1",
+    "nodemon": "^1.12.1",
+    "postcss-sass": "^0.2.0",
+    "standard": "^10.0.3",
+    "stylelint": "^8.3.1",
+    "stylelint-config-standard": "^18.0.0",
+    "supertest": "^3.0.0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   },
   "eslintConfig": {
     "extends": [
       "standard",
       "react-app"
-    ]
+    ],
+    "env": {
+      "jest": true
+    }
   },
-  "devDependencies": {
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "redux-devtools-extension": "^2.13.2",
-    "standard": "^10.0.3"
+  "stylelint": {
+    "extends": "stylelint-config-standard"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/client/",
+      "<rootDir>/tmp/"
+    ]
   }
 }
