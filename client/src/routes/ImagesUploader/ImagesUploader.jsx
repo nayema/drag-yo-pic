@@ -1,10 +1,7 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
-import Gallery from 'react-photo-gallery'
 import Dropzone from 'react-dropzone'
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
-
-import ImageStyle from './ImageStyle'
+import upload from 'superagent'
+import { withStyles } from 'material-ui/styles'
 
 const styles = (theme) => ({
   root: {
@@ -16,50 +13,21 @@ const styles = (theme) => ({
   }
 })
 
-const photos = [
-  { src: 'https://source.unsplash.com/2ShvY8Lf6l0/800x599', width: 4, height: 3 },
-  { src: 'https://source.unsplash.com/Dm-qxdynoEc/800x799', width: 1, height: 1 },
-  { src: 'https://source.unsplash.com/qDkso9nvCg0/600x799', width: 3, height: 4 },
-  { src: 'https://source.unsplash.com/iecJiKe_RNg/600x799', width: 3, height: 4 },
-  { src: 'https://source.unsplash.com/epcsn8Ed8kY/600x799', width: 3, height: 4 },
-  { src: 'https://source.unsplash.com/NQSWvyVRIJk/800x599', width: 4, height: 3 },
-  { src: 'https://source.unsplash.com/zh7GEuORbUw/600x799', width: 3, height: 4 },
-  { src: 'https://source.unsplash.com/PpOHJezOalU/800x599', width: 4, height: 3 },
-  { src: 'https://source.unsplash.com/I1ASdgphUH4/800x599', width: 4, height: 3 }
-]
-const SortablePhoto = SortableElement(ImageStyle)
-
-const SortableGallery = SortableContainer(({ photos }) => {
-  return <Gallery photos={photos} ImageComponent={SortablePhoto}/>
-})
-
 class ImagesUploader extends React.Component {
-  constructor () {
-    super()
-    this.onSortEnd = this.onSortEnd.bind(this)
-    this.state = {
-      filesToBeSent: [],
-      photos: photos
-    }
-  }
 
-  onSortEnd ({ oldIndex, newIndex }) {
-    this.setState({
-      photos: arrayMove(this.state.photos, oldIndex, newIndex)
-    })
-  }
-
-  onDrop (acceptedFiles, rejectedFiles) {
-    console.log('Accepted files: ', acceptedFiles)
-    // const filesToBeSent = this.state.filesToBeSent
-    // filesToBeSent.push(acceptedFiles)
-    // this.setState({ filesToBeSent })
+  onDrop (files) {
+    upload.post('/upload')
+      .attach('theseNamesMustMatch', files[0])
+      .end((err, res) => {
+        if (err) console.log(err)
+        alert('Files(s) Uploaded!')
+      })
   }
 
   render () {
     return (
-      <Dropzone style={{}} disableClick={true} onDrop={(files) => this.onDrop(files)}>
-        <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
+      <Dropzone style={{}} disableClick={true} onDrop={this.onDrop}>
+        <div>Upload your pictures here</div>
       </Dropzone>
     )
   }
