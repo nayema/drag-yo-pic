@@ -14,7 +14,6 @@ const styles = (theme) => ({
 })
 
 class ImagesUploader extends React.Component {
-
   onDrop (files) {
     upload.post('/upload')
       .attach('theseNamesMustMatch', files[0])
