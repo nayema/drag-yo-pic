@@ -1,6 +1,7 @@
 import React from 'react'
 import { withStyles } from 'material-ui/styles'
 import Gallery from 'react-photo-gallery'
+import Dropzone from 'react-dropzone'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
 
 import ImageStyle from './ImageStyle'
@@ -37,6 +38,7 @@ class ImagesUploader extends React.Component {
     super()
     this.onSortEnd = this.onSortEnd.bind(this)
     this.state = {
+      filesToBeSent: [],
       photos: photos
     }
   }
@@ -47,9 +49,18 @@ class ImagesUploader extends React.Component {
     })
   }
 
+  onDrop (acceptedFiles, rejectedFiles) {
+    console.log('Accepted files: ', acceptedFiles)
+    // const filesToBeSent = this.state.filesToBeSent
+    // filesToBeSent.push(acceptedFiles)
+    // this.setState({ filesToBeSent })
+  }
+
   render () {
     return (
-      <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
+      <Dropzone style={{}} disableClick={true} onDrop={(files) => this.onDrop(files)}>
+        <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
+      </Dropzone>
     )
   }
 }
