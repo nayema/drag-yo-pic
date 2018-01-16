@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-// import * as tasks from './task-list'
+// import * as images from './images-uploader'
 
 export default combineReducers({
   routing: routerReducer
-  // taskList: tasks.reducer,
+  // images: images.reducer
 })

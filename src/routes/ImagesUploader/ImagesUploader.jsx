@@ -54,9 +54,4 @@ class ImagesUploader extends React.Component {
   }
 }
 
-// const ImagesUploader = ({ classes }) => (
-//   <div className={classes.root}>
-//   </div>
-// )
-
 export default withStyles(styles)(ImagesUploader)
