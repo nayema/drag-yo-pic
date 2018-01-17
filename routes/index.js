@@ -1,13 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const multer = require('multer')
 
-/* GET home page. */
-router.get('/', function (req, res) {
-  res.send({ title: 'Express' })
-})
+const upload = multer({ dest: 'public/uploads' })
 
-router.post('/upload', function (req, res) {
-  res.send({ src: 'foo.jpg' })
+router.post('/upload', upload.single('theseNamesMustMatch'), function (req, res, next) {
+  res.send({})
 })
 
 module.exports = router

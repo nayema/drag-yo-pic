@@ -19,13 +19,12 @@ class ImagesUploader extends React.Component {
       .attach('theseNamesMustMatch', files[0])
       .end((err, res) => {
         if (err) console.log(err)
-        alert('Files(s) Uploaded!')
+        console.log('File uploaded!')
       })
   }
-
   render () {
     return (
-      <Dropzone style={{}} disableClick={true} onDrop={this.onDrop}>
+      <Dropzone style={{}} disableClick={true} onDrop={this.onDrop} accept={'image/*'}>
         <div>Upload your pictures here</div>
       </Dropzone>
     )
