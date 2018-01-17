@@ -14,18 +14,34 @@ const styles = (theme) => ({
 })
 
 class ImagesUploader extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { photos: [] }
+
+    this.onDrop = this.onDrop.bind(this)
+  }
+
   onDrop (files) {
     upload.post('/upload')
       .attach('theseNamesMustMatch', files[0])
       .end((err, res) => {
         if (err) console.log(err)
-        console.log('File uploaded!')
+        this.setState(prevState => {
+          const photos = prevState.photos
+          return {
+            photos: photos.concat(`uploads/${res.body.file.filename}`)
+          }
+        })
       })
   }
+
   render () {
     return (
       <Dropzone style={{}} disableClick={true} onDrop={this.onDrop} accept={'image/*'}>
         <div>Upload your pictures here</div>
+        {this.state.photos.map((photo) => (
+          <img key={photo} src={`http://localhost:3000/${photo}`} width={200}/>
+        ))}
       </Dropzone>
     )
   }
