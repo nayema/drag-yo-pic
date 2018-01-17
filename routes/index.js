@@ -4,8 +4,8 @@ const multer = require('multer')
 
 const upload = multer({ dest: 'public/uploads' })
 
-router.post('/upload', upload.single('theseNamesMustMatch'), function (req, res, next) {
-  res.send({ file: req.file })
+router.post('/upload', upload.array('photos'), function (req, res, next) {
+  res.send({ files: req.files })
 })
 
 module.exports = router

@@ -1,6 +1,6 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
-import upload from 'superagent'
+import request from 'superagent'
 import { withStyles } from 'material-ui/styles'
 
 const styles = (theme) => ({
@@ -22,14 +22,17 @@ class ImagesUploader extends React.Component {
   }
 
   onDrop (files) {
-    upload.post('/upload')
-      .attach('theseNamesMustMatch', files[0])
+    const photos = new FormData()
+    files.forEach(file => photos.append('photos', file))
+    request.post('/upload')
+      .send(photos)
       .end((err, res) => {
         if (err) console.log(err)
         this.setState(prevState => {
-          const photos = prevState.photos
+          const oldPhotos = prevState.photos
+          const newPhotos = res.body.files.map(file => `uploads/${file.filename}`)
           return {
-            photos: photos.concat(`uploads/${res.body.file.filename}`)
+            photos: oldPhotos.concat(newPhotos)
           }
         })
       })
