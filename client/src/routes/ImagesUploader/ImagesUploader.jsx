@@ -40,7 +40,7 @@ class ImagesUploader extends React.Component {
       <Dropzone style={{}} disableClick={true} onDrop={this.onDrop} accept={'image/*'}>
         <div>Upload your pictures here</div>
         {this.state.photos.map((photo) => (
-          <img key={photo} src={`http://localhost:3000/${photo}`} width={200}/>
+          <img key={photo} src={photo} width={200}/>
         ))}
       </Dropzone>
     )
