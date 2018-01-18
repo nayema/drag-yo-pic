@@ -2,6 +2,7 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import Gallery from 'react-photo-gallery'
+import Button from 'material-ui/Button'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
 import { withStyles } from 'material-ui/styles'
 
@@ -14,6 +15,9 @@ const styles = (theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.contentFrame
+  },
+  button: {
+    margin: theme.spacing.unit
   }
 })
 
@@ -25,9 +29,11 @@ const SortableGallery = SortableContainer(({ photos }) => (
 class ImagesUploader extends React.Component {
   constructor (props) {
     super(props)
+    this.classes = props.classes
     this.state = { photos: [] }
 
     this.onDrop = this.onDrop.bind(this)
+    this.onClick = this.onClick.bind(this)
     this.onSortEnd = this.onSortEnd.bind(this)
   }
 
@@ -52,6 +58,14 @@ class ImagesUploader extends React.Component {
       })
   }
 
+  onClick () {
+    const orderedFileNames = this.state.photos.map(img => img.src)
+    request.post('/reorder')
+      .send(orderedFileNames)
+      .end((err, res) => {
+      })
+  }
+
   onSortEnd ({ oldIndex, newIndex }) {
     this.setState({
       photos: arrayMove(this.state.photos, oldIndex, newIndex)
@@ -61,6 +75,9 @@ class ImagesUploader extends React.Component {
   render () {
     return (
       <Dropzone style={{}} disableClick={true} onDrop={this.onDrop} accept={'image/*'}>
+        <Button raised color="accent" className={this.classes.button} onClick={this.onClick}>
+          Reorder
+        </Button>
         <div>Upload your pictures here</div>
         <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
       </Dropzone>

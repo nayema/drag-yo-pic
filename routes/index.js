@@ -8,4 +8,8 @@ router.post('/upload', upload.array('photos'), function (req, res, next) {
   res.send({ files: req.files })
 })
 
+router.post('/reorder', function (req, res) {
+  res.send('foo')
+})
+
 module.exports = router
