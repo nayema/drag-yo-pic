@@ -33,7 +33,7 @@ class ImagesUploader extends React.Component {
     this.state = { photos: [] }
 
     this.onDrop = this.onDrop.bind(this)
-    this.onClick = this.onClick.bind(this)
+    this.onReorder = this.onReorder.bind(this)
     this.onSortEnd = this.onSortEnd.bind(this)
   }
 
@@ -58,7 +58,7 @@ class ImagesUploader extends React.Component {
       })
   }
 
-  onClick () {
+  onReorder () {
     const orderedFileNames = this.state.photos.map(img => img.src)
     request.post('/reorder')
       .send(orderedFileNames)
@@ -75,7 +75,7 @@ class ImagesUploader extends React.Component {
   render () {
     return (
       <Dropzone style={{}} disableClick={true} onDrop={this.onDrop} accept={'image/*'}>
-        <Button raised color="accent" className={this.classes.button} onClick={this.onClick}>
+        <Button raised color="accent" className={this.classes.button} onClick={this.onReorder}>
           Reorder
         </Button>
         <div>Upload your pictures here</div>
