@@ -132,8 +132,7 @@ class ImagesUploader extends React.Component {
         <Button raised className={this.classes.button} onClick={this.onClearAll}>
           Clear All
         </Button>
-        <Dropzone className={this.classes.dropzone} style={{}} disableClick={true} onDrop={this.onDrop}
-          accept={'image/*'}>
+        <Dropzone className={this.classes.dropzone} style={{}} disableClick={true} onDrop={this.onDrop}>
           <div>Upload your pictures here</div>
           <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
         </Dropzone>
