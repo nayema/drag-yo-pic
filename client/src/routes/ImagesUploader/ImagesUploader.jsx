@@ -43,6 +43,7 @@ class ImagesUploader extends React.Component {
 
     this.onDrop = this.onDrop.bind(this)
     this.onReorder = this.onReorder.bind(this)
+    this.onClearAll = this.onClearAll.bind(this)
     this.onSortEnd = this.onSortEnd.bind(this)
   }
 
@@ -84,8 +85,17 @@ class ImagesUploader extends React.Component {
     }
     request.post('/reorder')
       .send(payload)
-      .end((err, res) => {
-      })
+      .end()
+  }
+
+  onClearAll () {
+    this.setState(prevState => ({
+      ...prevState,
+      photos: []
+    }))
+    request.post('/clear-all')
+      .send()
+      .end()
   }
 
   onSortEnd ({ oldIndex, newIndex }) {
@@ -113,6 +123,9 @@ class ImagesUploader extends React.Component {
         </form>
         <Button raised color="accent" className={this.classes.button} onClick={this.onReorder}>
           Reorder
+        </Button>
+        <Button raised className={this.classes.button} onClick={this.onClearAll}>
+          Clear All
         </Button>
         <Dropzone className={this.classes.dropzone} style={{}} disableClick={true} onDrop={this.onDrop}
           accept={'image/*'}>

@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
+const fs = require('fs')
+const path = require('path')
 const { DateTime } = require('luxon')
 const { ExifTool } = require('exiftool-vendored')
 
@@ -24,6 +26,15 @@ router.post('/reorder', async function (req, res) {
     setStartOrderTime = setStartOrderTime.plus({ minutes: 1 })
   }
   await exiftool.end()
+  res.end()
+})
+
+router.post('/clear-all', function (req, res) {
+  const directory = 'public/uploads'
+  const files = fs.readdirSync(directory)
+  for (const file of files) {
+    fs.unlinkSync(path.join(directory, file))
+  }
   res.end()
 })
 
