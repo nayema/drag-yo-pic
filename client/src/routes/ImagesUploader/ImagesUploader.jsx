@@ -15,7 +15,7 @@ const styles = (theme) => ({
     justifyContent: 'space-around',
     overflowX: 'auto',
     backgroundColor: theme.palette.background.contentFrame,
-    height: 500
+    height: 800
 
   },
   button: {
@@ -36,10 +36,12 @@ class ImagesUploader extends React.Component {
   constructor (props) {
     super(props)
     this.classes = props.classes
+    const now = (new Date()).toISOString()
     this.state = {
       photos: [],
-      startOrderTime: '2000-01-30T00:30:00'
+      startOrderTime: now.slice(0, 16)
     }
+    console.log(this.state)
 
     this.onDrop = this.onDrop.bind(this)
     this.onReorder = this.onReorder.bind(this)
