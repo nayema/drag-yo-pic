@@ -2,6 +2,7 @@ import React from 'react'
 import request from 'superagent'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
+import Save from 'material-ui-icons/Save'
 import Gallery from 'react-photo-gallery'
 import Dropzone from 'react-dropzone'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
@@ -15,7 +16,7 @@ const styles = (theme) => ({
     justifyContent: 'space-around',
     overflowX: 'auto',
     backgroundColor: theme.palette.background.contentFrame,
-    height: 800
+    height: 600
 
   },
   button: {
@@ -24,6 +25,9 @@ const styles = (theme) => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
   }
 })
 
@@ -36,12 +40,11 @@ class ImagesUploader extends React.Component {
   constructor (props) {
     super(props)
     this.classes = props.classes
-    const now = (new Date()).toISOString()
+    const now = ((new Date()).toISOString()).slice(0, 16)
     this.state = {
       photos: [],
-      startOrderTime: now.slice(0, 16)
+      startOrderTime: now
     }
-    console.log(this.state)
 
     this.onDrop = this.onDrop.bind(this)
     this.onReorder = this.onReorder.bind(this)
@@ -134,6 +137,10 @@ class ImagesUploader extends React.Component {
           <div>Upload your pictures here</div>
           <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
         </Dropzone>
+        <Button className={this.classes.button} raised dense href="http://localhost:3001/save">
+          <Save className={this.classes.leftIcon} />
+          Save
+        </Button>
       </div>
     )
   }

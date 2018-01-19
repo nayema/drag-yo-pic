@@ -38,4 +38,13 @@ router.post('/clear-all', function (req, res) {
   res.end()
 })
 
+router.get('/save', function (req, res) {
+  res.zip({
+    files: [
+      { path: 'public/uploads', name: 'photos' }
+    ],
+    filename: 'photos.zip'
+  })
+})
+
 module.exports = router
