@@ -129,16 +129,16 @@ class ImagesUploader extends React.Component {
         <Button raised color="accent" className={this.classes.button} onClick={this.onReorder}>
           Reorder
         </Button>
-        <Button raised className={this.classes.button} onClick={this.onClearAll}>
-          Clear All
+        <Button className={this.classes.button} raised dense href="http://localhost:3001/save">
+          <Save className={this.classes.leftIcon} />
+          Save
         </Button>
         <Dropzone className={this.classes.dropzone} style={{}} disableClick={true} onDrop={this.onDrop}>
           <div>Upload your pictures here</div>
           <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
         </Dropzone>
-        <Button className={this.classes.button} raised dense href="http://localhost:3001/save">
-          <Save className={this.classes.leftIcon} />
-          Save
+        <Button raised className={this.classes.button} onClick={this.onClearAll}>
+          Clear All
         </Button>
       </div>
     )
