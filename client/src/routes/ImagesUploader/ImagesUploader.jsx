@@ -1,23 +1,30 @@
 import React from 'react'
-import Dropzone from 'react-dropzone'
 import request from 'superagent'
-import Gallery from 'react-photo-gallery'
+import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
+import Gallery from 'react-photo-gallery'
+import Dropzone from 'react-dropzone'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
 import { withStyles } from 'material-ui/styles'
 
 import Photo from './Photo'
 
 const styles = (theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+  dropzone: {
+    flexGrow: 1,
     justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.contentFrame
+    overflowX: 'auto',
+    backgroundColor: theme.palette.background.contentFrame,
+    height: 500
+
   },
   button: {
     margin: theme.spacing.unit
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
   }
 })
 
@@ -60,8 +67,12 @@ class ImagesUploader extends React.Component {
 
   onReorder () {
     const orderedFileNames = this.state.photos.map(img => img.src)
+    const reorderedPhotos = {
+      startOrderTime: '',
+      orderedFileNames: orderedFileNames
+    }
     request.post('/reorder')
-      .send(orderedFileNames)
+      .send(reorderedPhotos)
       .end((err, res) => {
       })
   }
@@ -74,13 +85,28 @@ class ImagesUploader extends React.Component {
 
   render () {
     return (
-      <Dropzone style={{}} disableClick={true} onDrop={this.onDrop} accept={'image/*'}>
+      <div>
+        <form noValidate>
+          <TextField
+            id="datetime-local"
+            label="Set Start Time"
+            type="datetime-local"
+            defaultValue="2000-01-30T00:30"
+            className={this.classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        </form>
         <Button raised color="accent" className={this.classes.button} onClick={this.onReorder}>
           Reorder
         </Button>
-        <div>Upload your pictures here</div>
-        <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
-      </Dropzone>
+        <Dropzone className={this.classes.dropzone} style={{}} disableClick={true} onDrop={this.onDrop}
+          accept={'image/*'}>
+          <div>Upload your pictures here</div>
+          <SortableGallery axis={'xy'} photos={this.state.photos} onSortEnd={this.onSortEnd}/>
+        </Dropzone>
+      </div>
     )
   }
 }
