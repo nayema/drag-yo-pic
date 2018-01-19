@@ -12,7 +12,8 @@ router.post('/upload', upload.array('photos'), function (req, res, next) {
 
 router.post('/reorder', async function (req, res) {
   const exiftool = new ExifTool()
-  let setStartOrderTime = DateTime.fromISO('2018-01-01T00:00:00')
+  const startOrderTime = req.body.startOrderTime
+  let setStartOrderTime = DateTime.fromISO(startOrderTime)
   const orderedFileNames = req.body.orderedFileNames
   for (let i = 0; i < orderedFileNames.length; i++) {
     await exiftool.write(

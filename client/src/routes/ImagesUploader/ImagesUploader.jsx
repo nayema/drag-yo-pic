@@ -23,8 +23,7 @@ const styles = (theme) => ({
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+    marginRight: theme.spacing.unit
   }
 })
 
@@ -37,11 +36,22 @@ class ImagesUploader extends React.Component {
   constructor (props) {
     super(props)
     this.classes = props.classes
-    this.state = { photos: [] }
+    this.state = {
+      photos: [],
+      startOrderTime: '2000-01-30T00:30:00'
+    }
 
     this.onDrop = this.onDrop.bind(this)
     this.onReorder = this.onReorder.bind(this)
     this.onSortEnd = this.onSortEnd.bind(this)
+  }
+
+  onDateTimeChange (startOrderTime) {
+    this.setState(prevState => ({
+        ...prevState,
+        startOrderTime
+      })
+    )
   }
 
   onDrop (files) {
@@ -59,6 +69,7 @@ class ImagesUploader extends React.Component {
             height: 1
           }))
           return {
+            ...prevState,
             photos: oldPhotos.concat(newPhotos)
           }
         })
@@ -67,20 +78,21 @@ class ImagesUploader extends React.Component {
 
   onReorder () {
     const orderedFileNames = this.state.photos.map(img => img.src)
-    const reorderedPhotos = {
-      startOrderTime: '',
+    const payload = {
+      startOrderTime: this.state.startOrderTime,
       orderedFileNames: orderedFileNames
     }
     request.post('/reorder')
-      .send(reorderedPhotos)
+      .send(payload)
       .end((err, res) => {
       })
   }
 
   onSortEnd ({ oldIndex, newIndex }) {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       photos: arrayMove(this.state.photos, oldIndex, newIndex)
-    })
+    }))
   }
 
   render () {
@@ -91,7 +103,8 @@ class ImagesUploader extends React.Component {
             id="datetime-local"
             label="Set Start Time"
             type="datetime-local"
-            defaultValue="2000-01-30T00:30"
+            value={this.state.startOrderTime}
+            onChange={(e) => this.onDateTimeChange(e.target.value)}
             className={this.classes.textField}
             InputLabelProps={{
               shrink: true
