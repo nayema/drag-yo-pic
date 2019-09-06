@@ -11,7 +11,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "exiftool-vendored": "^4.14.1",
-    "express": "~4.15.5",
+    "express": "~4.17.1",
     "express-easy-zip": "^1.1.4",
     "luxon": "^0.3.1",
     "morgan": "~1.9.0",
@@ -21,10 +21,10 @@
     "serve-favicon": "~2.5.0"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.8",
+    "@types/jest": "^24.0.18",
     "@types/supertest": "^2.0.8",
     "babel-eslint": "^7.2.3",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^4.14.0",
     "eslint-config-react-app": "^2.0.1",
     "eslint-config-standard": "^10.2.1",
