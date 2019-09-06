@@ -11,7 +11,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "exiftool-vendored": "^4.14.1",
-    "express": "~4.15.5",
+    "express": "~4.17.1",
     "express-easy-zip": "^1.1.4",
     "luxon": "^0.3.1",
     "morgan": "~1.9.0",
