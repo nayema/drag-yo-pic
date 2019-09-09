@@ -7,7 +7,7 @@
     "test": "node_modules/.bin/jest --watch"
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
+    "body-parser": "~1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~4.1.1",
     "exiftool-vendored": "^4.14.1",
